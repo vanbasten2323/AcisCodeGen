@@ -1,0 +1,15 @@
+/// <summary>
+/// TODO
+/// </summary>
+/// <param name="name">Service Setting Name</param>
+/// <param name="value">Service Setting Value</param>
+/// <returns>IAcisSMEOperationResponse</returns>
+public IAcisSMEOperationResponse CreateOrUpdateServiceSetting(string name, string value)
+{
+	return this.ExecuteAdministrationOperation
+		(admin, context) =>
+		{
+			//TODO
+		},
+		err => string.Format("Failed to due to {0}.", err));
+}

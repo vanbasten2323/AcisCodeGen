@@ -1,0 +1,14 @@
+/// <summary>
+/// TODO
+/// </summary>
+/// <param name=""></param>
+/// <returns>IAcisSMEOperationResponse</returns>
+public IAcisSMEOperationResponse ListServiceSettings( )
+{
+	return this.ExecuteAdministrationOperation(
+		(admin, context) =>
+		{
+			return null; //TODO
+				},
+		err => string.Format("Unable to due to {0}.", err)); // TODO: Refine the error message.
+}

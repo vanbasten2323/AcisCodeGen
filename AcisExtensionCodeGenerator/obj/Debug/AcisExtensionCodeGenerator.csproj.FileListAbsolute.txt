@@ -1,0 +1,6 @@
+c:\users\xiowei\documents\visual studio 2015\Projects\AcisExtensionCodeGenerator\AcisExtensionCodeGenerator\bin\Debug\AcisExtensionCodeGenerator.exe.config
+c:\users\xiowei\documents\visual studio 2015\Projects\AcisExtensionCodeGenerator\AcisExtensionCodeGenerator\bin\Debug\AcisExtensionCodeGenerator.exe
+c:\users\xiowei\documents\visual studio 2015\Projects\AcisExtensionCodeGenerator\AcisExtensionCodeGenerator\bin\Debug\AcisExtensionCodeGenerator.pdb
+c:\users\xiowei\documents\visual studio 2015\Projects\AcisExtensionCodeGenerator\AcisExtensionCodeGenerator\obj\Debug\AcisExtensionCodeGenerator.csprojResolveAssemblyReference.cache
+c:\users\xiowei\documents\visual studio 2015\Projects\AcisExtensionCodeGenerator\AcisExtensionCodeGenerator\obj\Debug\AcisExtensionCodeGenerator.exe
+c:\users\xiowei\documents\visual studio 2015\Projects\AcisExtensionCodeGenerator\AcisExtensionCodeGenerator\obj\Debug\AcisExtensionCodeGenerator.pdb

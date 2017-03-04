@@ -1,0 +1,9 @@
+Operation:GetServiceSetting
+OperationDisplayName:Get Service Setting
+OperationType:RDFEROOperation
+OperationGroup:OSManagementOperation
+OperationGroupDisplayName:na
+ApproverParameterNeeded:N
+ApproverLinkParameterNeeded:N
+HelperFunctionName:GetServiceSetting
+Parameter:string:settingName:Service Setting Name:ServiceSettingName:AcisSMETextParameter

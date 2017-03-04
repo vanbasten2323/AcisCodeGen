@@ -1,0 +1,9 @@
+Operation:RotateCacheAccountKey
+OperationDisplayName:Rotate Cache Account Key
+OperationType:RDFERWOperation
+OperationGroup:PlatformImageRepositoryManagementOperation
+OperationGroupDisplayName:na
+ApproverParameterNeeded:Y
+ApproverLinkParameterNeeded:Y
+HelperFunctionName:RotateCacheAccountKey
+Parameter:string:cacheAccountName:Cache Account Name:CacheAccountName:AcisSMETextParameter

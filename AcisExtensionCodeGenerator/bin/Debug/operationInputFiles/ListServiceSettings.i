@@ -1,0 +1,9 @@
+Operation:ListServiceSettings
+OperationDisplayName:List Service Settings
+OperationType:RDFEROOperation
+OperationGroup:OSManagementOperation
+OperationGroupDisplayName:na
+ApproverParameterNeeded:N
+ApproverLinkParameterNeeded:N
+HelperFunctionName:ListServiceSettings
+Parameter:::::
