@@ -72,18 +72,26 @@ namespace AcisExtensionCodeGenerator
                 foreach (Parameter param in parameterList)
                 {
                     file.WriteLine("/// <param name=\"" + param.ParamName +"\">" + param.ParamDisplayName + "</param>");
-                    sb.Append(param.ParamVariableType + " " + param.ParamName.ToLower() + ", ");
+                    sb.Append(param.ParamVariableType + " " + param.ParamName + ", ");
                 }
                 file.WriteLine("/// <returns>IAcisSMEOperationResponse</returns>");
                 int sbLen = sb.Length;
                 sb.Remove(sbLen - 2, 2);
                 file.WriteLine("public IAcisSMEOperationResponse " + helperFunctionName + "(" + sb + ")");
                 file.WriteLine("{");
+                file.WriteLine("\t// TODO: verify the parameters. Delete these two line after verify.");
+                sb = new StringBuilder();
+                foreach (Parameter param in parameterList)
+                {
+                    sb.Append("+ \"" + param.ParamName + ":{\"" + " + " + param.ParamName + ".GetType() " + "+ \", \" +" + param.ParamName + "+ \"}; \""); // TODO change here
+                }
+                sb.Remove(0, 1);
+                file.WriteLine("\tthrow new ArgumentException(" + sb + "); // TODO: delete this line after verification.");
                 file.WriteLine("\treturn this.ExecuteAdministrationOperation( // TODO: Check here: Administration or Management or others.");
                 file.WriteLine("\t\t(admin, context) =>");
                 file.WriteLine("\t\t{");
                 file.WriteLine("\t\t\treturn null; //TODO");
-                file.WriteLine("\t\t\t\t},");
+                file.WriteLine("\t\t\t},");
                 file.WriteLine("\t\terr => string.Format(\"Unable to due to {0}.\", err)); // TODO: Refine the error message.");
                 file.WriteLine("}");
             }
@@ -131,7 +139,7 @@ namespace AcisExtensionCodeGenerator
                 file.WriteLine("\tusing Microsoft.Cloud.Engineering.RdfeExtension.Parameters;");
                 file.WriteLine();
                 file.WriteLine("\t/// <summary>");
-                file.WriteLine("\t/// " + operationDisplayName);
+                file.WriteLine("\t/// " + operationDisplayName + " operation.");
                 file.WriteLine("\t/// </summary>");
                 file.WriteLine("\tpublic class " + operation + "Operation : " + operationType);
                 file.WriteLine("\t{");
