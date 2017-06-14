@@ -1,0 +1,9 @@
+Operation:RemoveRDFESetting
+OperationDisplayName:Remove RDFE Setting (TSQ)
+OperationType:RDFERWOperation
+OperationGroup:OSManagementOperation
+OperationGroupDisplayName:na
+ApproverParameterNeeded:Y
+ApproverLinkParameterNeeded:Y
+HelperFunctionName:RemoveRDFESetting
+Parameter:string:settingName:na:na:na

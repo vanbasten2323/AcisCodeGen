@@ -1,0 +1,9 @@
+Operation:ListReplicationJobQueue
+OperationDisplayName:List Replication Job Queue (TSQ)
+OperationType:RDFEROOperation
+OperationGroup:PlatformImageRepositoryManagementOperation
+OperationGroupDisplayName:na
+ApproverParameterNeeded:N
+ApproverLinkParameterNeeded:N
+HelperFunctionName:ListReplicationJobQueue
+Parameter:string:componentName:Component Name:ComponentName:na

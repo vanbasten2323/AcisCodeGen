@@ -1,0 +1,9 @@
+Operation:ListConfigurationSettings
+OperationDisplayName:List Configuration Settings
+OperationType:RDFEROOperation
+OperationGroup:OSManagementOperation
+OperationGroupDisplayName:na
+ApproverParameterNeeded:N
+ApproverLinkParameterNeeded:N
+HelperFunctionName:ListConfigurationSettings
+Parameter:bool:isActiveOnly:Is Active Only:IsActiveOnly:AcisSMEBooleanParameter

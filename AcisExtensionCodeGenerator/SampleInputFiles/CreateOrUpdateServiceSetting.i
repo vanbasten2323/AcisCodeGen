@@ -1,0 +1,10 @@
+Operation:CreateOrUpdateServiceSetting
+OperationDisplayName:Create or Update Service Setting Extension
+OperationType:RDFERWOperation
+OperationGroup:ServiceSettings
+OperationGroupDisplayName:Service Setting
+ApproverParameterNeeded:Y
+ApproverLinkParameterNeeded:Y
+HelperFunctionName:CreateOrUpdateServiceSetting
+Parameter:string:name:Service Setting Name:ServiceSettingName:AcisSMETextParameter
+Parameter:string:value:Service Setting Value:ServiceSettingValue:AcisSMETextParameter

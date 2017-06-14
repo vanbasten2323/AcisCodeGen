@@ -1,0 +1,12 @@
+Operation:UnregisterExtension
+OperationDisplayName:Unregister Extension
+OperationType:RDFERWOperation
+OperationGroup:OSManagementOperation
+OperationGroupDisplayName:na
+ApproverParameterNeeded:Y
+ApproverLinkParameterNeeded:Y
+HelperFunctionName:UnregisterExtension
+Parameter:string:subscriptionId:Subscription Id:subscription:na
+Parameter:string:providerNamespace:Provider Namespace:ProviderNamespace:AcisSMETextParameter
+Parameter:string:type:Type:Type:na
+Parameter:string:version:Version:Version:AcisSMETextParameter

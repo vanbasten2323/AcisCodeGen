@@ -1,0 +1,10 @@
+Operation:UnreplicateAllAssets
+OperationDisplayName:Unreplicate All Assets (TSQ)
+OperationType:RDFERWOperation
+OperationGroup:PlatformImageRepositoryManagementOperation
+OperationGroupDisplayName:na
+ApproverParameterNeeded:Y
+ApproverLinkParameterNeeded:Y
+HelperFunctionName:UnreplicateAllAssets
+Parameter:string:subscriptionId:Subscription Id:subscription:na
+Parameter:string:publisherCode:Publisher Code:na:na

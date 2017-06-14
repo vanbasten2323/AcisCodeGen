@@ -1,0 +1,10 @@
+Operation:FindTenantNameByAddress
+OperationDisplayName:Find Tenant Name By Address (Fabric)
+OperationType:RDFEROOperation
+OperationGroup:SubscriptionOperation
+OperationGroupDisplayName:na
+ApproverParameterNeeded:N
+ApproverLinkParameterNeeded:N
+HelperFunctionName:FindTenantNameByAddress
+Parameter:string:fabricClusterName:Fabric Cluster:FabricClusterName:AcisSMETextParameter
+Parameter:string:tenantAddress:Tenant Address:TenantAddress:AcisSMETextParameter

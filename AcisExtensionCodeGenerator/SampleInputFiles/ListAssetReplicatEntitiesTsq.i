@@ -1,0 +1,12 @@
+Operation:ListAssetReplicaEntities
+OperationDisplayName:List Asset Replica Entites (TSQ)
+OperationType:RDFEROOperation
+OperationGroup:PlatformImageRepositoryManagementOperation
+OperationGroupDisplayName:na
+ApproverParameterNeeded:N
+ApproverLinkParameterNeeded:N
+HelperFunctionName:ListAssetReplicaEntities
+Parameter:string:assetPublishedName:Asset Published Name:AssetPublishedName:AcisSMETextParameter
+Parameter:string:cacheName:Cache Name:CacheName:AcisSMETextParameter
+Parameter:string:locationOptional:Location:LocationOptional:AcisSMETextParameter
+Parameter:string:publisherCodeOptional:Publisher Code:PublisherCodeOptional:AcisSMETextParameter

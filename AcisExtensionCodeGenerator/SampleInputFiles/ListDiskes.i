@@ -1,0 +1,9 @@
+Operation:ListDisks
+OperationDisplayName:List Disks
+OperationType:RDFEROOperation
+OperationGroup:ServiceManagementOperation
+OperationGroupDisplayName:na
+ApproverParameterNeeded:N
+ApproverLinkParameterNeeded:N
+HelperFunctionName:ListDisks
+Parameter:string:subscriptionId:Subscription Id:Subscription:na

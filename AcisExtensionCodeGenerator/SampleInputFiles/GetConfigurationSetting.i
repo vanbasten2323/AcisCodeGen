@@ -1,0 +1,11 @@
+Operation:GetConfigurationSetting
+OperationDisplayName:Get Configuration Setting
+OperationType:RDFEROOperation
+OperationGroup:OSManagementOperation
+OperationGroupDisplayName:na
+ApproverParameterNeeded:N
+ApproverLinkParameterNeeded:N
+HelperFunctionName:GetConfigurationSetting
+Parameter:string:namespace:Namespace:Namespace:AcisSMETextParameter
+Parameter:string:key:Key:Key:AcisSMETextParameter
+Parameter:bool:isActiveOnly:Is Active Only:IsActiveOnly:AcisSMEBooleanParameter

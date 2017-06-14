@@ -1,0 +1,14 @@
+AcisExtensionCodeGenerator/bin/**/*
+AcisExtensionCodeGenerator/obj/**/*
+
+###
+Repository Bloat Risks
+###
+*.exe
+*.dll
+*.lib
+*.pdb
+*.wim
+*.zip
+*.gz
+

@@ -1,0 +1,10 @@
+Operation:AddOrUpdateSetting
+OperationDisplayName:Add or Update RDFE Setting (TSQ)
+OperationType:RDFERWOperation
+OperationGroup:OSManagementOperation
+OperationGroupDisplayName:na
+ApproverParameterNeeded:Y
+ApproverLinkParameterNeeded:Y
+HelperFunctionName:AddOrUpdateSetting
+Parameter:string:settingName:Setting Name:SettingName:AcisSMETextParameter
+Parameter:string:settingValue:Setting Value:SettingValue:AcisSMETextParameter

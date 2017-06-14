@@ -20,13 +20,32 @@ namespace AcisExtensionCodeGenerator
             bool isApproverLinkParameterNeeded = false;
             string helperFunctionName = "";
             List<Parameter> parameterList = new List<Parameter>();
-            // Read a input file from command line.
-            string inputFileName = args[0];
-            if (inputFileName.Length == 0)
+
+            // Check input arguments
+            if (args.Length == 0)
             {
-                Console.WriteLine("Should provide an input file.");
-                Console.ReadLine();
+                Console.WriteLine("Use -h or --help to see the help");
                 return;
+            }
+            if (args[0].Equals("-h") || args[0].Equals("--help"))
+            {
+                Console.WriteLine("Usage:");
+                Console.WriteLine("To generate source code: AcisExtensionCodeGenerator.exe <InputFileName>");
+                Console.WriteLine("To generate test file: AcisExtensionCodeGenerator.exe <InputFileName> --GenerateTestFileOnly");
+                return;
+            }
+
+            // Read a input file from command line.
+            string inputFileName = "";
+            string generateTestFlag = "";
+            if (args.Length == 1)
+            {
+                inputFileName = args[0];
+            }
+            else if (args.Length == 2)
+            {
+                inputFileName = args[0];
+                generateTestFlag = args[1];
             }
 
             string inputFile = @".\operationInputFiles\" + inputFileName; 
@@ -50,11 +69,96 @@ namespace AcisExtensionCodeGenerator
             Console.ReadLine();
             */
 
-            foreach(Parameter param in parameterList)
-                GenerateParameterCode(param);
-            GenerateOperationCode(operation, operationDisplayName, operationType, operationGroup, helperFunctionName, parameterList, isApproverParameterNeeded, isApproverLinkParameterNeeded);
-            //if (!string.IsNullOrEmpty(operationGroup)) GenerateOperationGroupCode(operationGroup, operationGroupDisplayName); // All the operation group exist already.
-            GenerateHelperFunction(helperFunctionName, parameterList);
+            if (!generateTestFlag.Equals("--GenerateTestFileOnly"))
+            {
+                foreach (Parameter param in parameterList)
+                    GenerateParameterCode(param);
+                GenerateOperationCode(operation, operationDisplayName, operationType, operationGroup, helperFunctionName,
+                    parameterList, isApproverParameterNeeded, isApproverLinkParameterNeeded);
+                //if (!string.IsNullOrEmpty(operationGroup)) GenerateOperationGroupCode(operationGroup, operationGroupDisplayName); // All the operation group exist already.
+                GenerateHelperFunction(helperFunctionName, parameterList);
+                GenerateTestFile(operationGroup, operation, parameterList);
+            }
+            else
+            {
+                GenerateTestFile(operationGroup, operation, parameterList);
+            }
+        }
+
+        private static void GenerateTestFile(string operationGroup, string operation, List<Parameter> parameterList)
+        {
+            using (
+                System.IO.StreamWriter file =
+                    new System.IO.StreamWriter(
+                        @"C:\Users\xiowei\Documents\Visual Studio 2015\Projects\AcisExtensionCodeGenerator\AcisExtensionCodeGenerator\bin\Debug\outputFiles\" +
+                        operation + "Tests.txt", true))
+            {
+                file.WriteLine("using System;");
+                file.WriteLine("using System.ServiceModel;");
+                file.WriteLine("using Microsoft.Cis.DevExp.Services.Rdfe.ServiceManagement;");
+                file.WriteLine("using Microsoft.Cloud.Engineering.RdfeExtension.DisplayHelpers;");
+                file.WriteLine("using Microsoft.Cloud.Engineering.RdfeExtension.Operations.OS;");
+                file.WriteLine("using Microsoft.Cloud.Engineering.RdfeExtension.RdfeExtension_UTestCommon;");
+                file.WriteLine("using Microsoft.Cloud.Engineering.RdfeExtension.RdfeExtension_UTestCommon.RdfeClient_Mock;");
+                file.WriteLine("using Microsoft.VisualStudio.TestTools.UnitTesting;");
+                file.WriteLine("using Microsoft.WindowsAzure.Wapd.Acis.Contracts;");
+                file.WriteLine("using Microsoft.Cloud.Engineering.RdfeExtension.Operations;");
+                file.WriteLine("");
+                file.WriteLine("namespace Microsoft.Cloud.Engineering.RdfeExtension.RdfeExtension_UTest.Operations." + operationGroup + "// TODO: change here.");
+                file.WriteLine("{");
+                file.WriteLine("\t[TestClass]");
+                file.WriteLine("\tpublic class " + operation + "Tests : RdfeExtensionTestBase");
+                file.WriteLine("\t{");
+                file.WriteLine("\t\t[ClassInitialize()]");
+                file.WriteLine("\t\tpublic static void ClassInitialize(TestContext context)");
+                file.WriteLine("\t\t{");
+                file.WriteLine("\t\t\tClassInit(context);");
+                file.WriteLine("\t\t}");
+                file.WriteLine("");
+                file.WriteLine("\t\t[TestMethod]");
+                file.WriteLine("\t\tpublic void Test_" + operation + "Operation()");
+                file.WriteLine("\t\t{");
+                file.WriteLine("\t\t\tIAcisSMEOperation operation = new " + operation + "Operation(s_acisExtension.m_SmeRdfeHelper);");
+                file.WriteLine("\t\t\ts_acisExtension.m_SmeRdfeHelper.CallingOperation = operation;");
+                file.WriteLine("\t\t\t// Get the expected claims required from https://acis.engineering.core.windows.net/authInfo.aspx");
+                file.WriteLine("\t\t\tIEnumerable<AcisUserClaim> expectedClaims = new[] {AcisSMESecurityGroup.PlatformServiceAdministrator, AcisSMESecurityGroup.ClientPlatformServiceAdministrator(\"RDFE\")}; // TODO: change here");
+                file.WriteLine("\t\t\tHelper.VerifyClaims(expectedClaims, operation.ClaimsRequired);");
+                foreach (Parameter param in parameterList)
+                {
+                    file.WriteLine("\t\t\t" + param.ParamVariableType + " " + param.ParamName + " = ; // TODO");
+                }
+                file.WriteLine("\t\t\tobject[] invocationParameterValues = new object[]");
+                file.WriteLine("\t\t\t{");
+                foreach (Parameter param in parameterList)
+                {
+                    file.WriteLine("\t\t\t\t" + param.ParamName + ",");
+                }
+                file.WriteLine("\t\t\t\t/*approver*/\"amdha, ferrys\", // TODO: check if this parameter is needed");
+                file.WriteLine("\t\t\t\t/*approverLink*/\"https://www.microsoft.com/\",// TODO: check if this parameter is needed");
+                file.WriteLine("\t\t\t\t/*endpoint*/s_acisExtension.m_Endpoint,");
+                file.WriteLine("\t\t\t\t/*updater*/new MockAcisSMEOperationProgressUpdater(),");
+                file.WriteLine("\t\t\t\t/*context*/OperationContext.Current");
+                file.WriteLine("\t\t\t};");
+                file.WriteLine("");
+                file.WriteLine("\t\t\t// May need to construct the expected result. Sample:");
+                file.WriteLine("\t\t\t//ConfigurationSettingList configurationSettingList = new ConfigurationSettingList();");
+                file.WriteLine("\t\t\t//configurationSettingList.Add(ConfigurationSettingObject());");
+                file.WriteLine("");
+                file.WriteLine("\t\t\t// May need to inject the mock delegate. Sample");
+                file.WriteLine("\t\t\t// Inject the mock delegate.");
+                file.WriteLine("\t\t\t//s_acisExtension.m_SmeRdfeHelper.MockOperationStub = objectArray => new MockAsyncResult(configurationSettingList); ");
+                file.WriteLine("");
+                file.WriteLine("\t\t\tIAcisSMEOperationResponse response = TestHelpers.RunOperation(operation, invocationParameterValues);");
+                file.WriteLine("");
+                file.WriteLine("\t\t\t// May need to compare the result. Sample:");
+                file.WriteLine("\t\t\t//ConfigurationSettingFormatter formatter = new ConfigurationSettingFormatter(s_acisExtension.m_Endpoint);");
+                file.WriteLine("\t\t\t//Assert.IsTrue(response.SuccessResult == SuccessResult.Success);");
+                file.WriteLine("\t\t\t//Assert.AreEqual(formatter.FormatConfigurationSettingsDisplay(configurationSettingList), response.Result.ToString());");
+                file.WriteLine("\t\t\t//StringAssert.Contains(response.Result.ToString(), \"Extension successfully registered.\");");
+                file.WriteLine("\t\t}");
+                file.WriteLine("\t}");
+                file.WriteLine("}");
+            }
         }
 
         private static void GenerateHelperFunction(string helperFunctionName, List<Parameter> parameterList)
@@ -88,7 +192,7 @@ namespace AcisExtensionCodeGenerator
                 sb.Remove(0, 1);
                 file.WriteLine("\tthrow new ArgumentException(" + sb + "); // TODO: delete this line after verification.");
                 file.WriteLine("\treturn this.ExecuteAdministrationOperation( // TODO: Check here: Administration or Management or others.");
-                file.WriteLine("\t\t(admin, context) =>");
+                file.WriteLine("\t\tadmin =>");
                 file.WriteLine("\t\t{");
                 file.WriteLine("\t\t\treturn null; //TODO");
                 file.WriteLine("\t\t\t},");
@@ -134,9 +238,9 @@ namespace AcisExtensionCodeGenerator
                 file.WriteLine("namespace Microsoft.Cloud.Engineering.RdfeExtension");
                 file.WriteLine("{");
                 file.WriteLine("\tusing System.Collections.Generic;");
-                file.WriteLine("\tusing Microsoft.WindowsAzure.Wapd.Acis.Contracts;");
-                file.WriteLine("\tusing Microsoft.Cloud.Engineering.RdfeExtension.OperationGroups;");
-                file.WriteLine("\tusing Microsoft.Cloud.Engineering.RdfeExtension.Parameters;");
+                file.WriteLine("\tusing WindowsAzure.Wapd.Acis.Contracts;");
+                file.WriteLine("\tusing OperationGroups;");
+                file.WriteLine("\tusing Parameters;");
                 file.WriteLine();
                 file.WriteLine("\t/// <summary>");
                 file.WriteLine("\t/// " + operationDisplayName + " operation.");
@@ -228,7 +332,7 @@ namespace AcisExtensionCodeGenerator
                         @"C:\Users\xiowei\Documents\Visual Studio 2015\Projects\AcisExtensionCodeGenerator\AcisExtensionCodeGenerator\bin\Debug\outputFiles\" +
                         parameter.ParamFileName + "Param.cs", true))
             {
-                file.WriteLine("namespace Microsoft.Cloud.Engineering.RdfeExtension");
+                file.WriteLine("namespace Microsoft.Cloud.Engineering.RdfeExtension.Parameters");
                 file.WriteLine("{");
                 file.WriteLine("\tusing WindowsAzure.Wapd.Acis.Contracts;");
                 file.WriteLine();
