@@ -48,7 +48,7 @@ namespace AcisExtensionCodeGenerator
                 generateTestFlag = args[1];
             }
 
-            string inputFile = @".\operationInputFiles\" + inputFileName; 
+            string inputFile = inputFileName; 
             ParseInputFile(inputFile, ref operation, ref operationDisplayName, ref operationType, ref operationGroup, ref operationGroupDisplayName, 
                 ref isApproverParameterNeeded, ref isApproverLinkParameterNeeded, ref helperFunctionName, ref parameterList);
 
@@ -166,8 +166,7 @@ namespace AcisExtensionCodeGenerator
             using (
                 System.IO.StreamWriter file =
                     new System.IO.StreamWriter(
-                        @"C:\Users\xiowei\Documents\Visual Studio 2015\Projects\AcisExtensionCodeGenerator\AcisExtensionCodeGenerator\bin\Debug\outputFiles\" +
-                         helperFunctionName + ".txt", true))
+                        helperFunctionName + ".txt", true))
             {
                 file.WriteLine("/// <summary>");
                 file.WriteLine("/// TODO");
@@ -206,7 +205,6 @@ namespace AcisExtensionCodeGenerator
             using (
                 System.IO.StreamWriter file =
                     new System.IO.StreamWriter(
-                        @"C:\Users\xiowei\Documents\Visual Studio 2015\Projects\AcisExtensionCodeGenerator\AcisExtensionCodeGenerator\bin\Debug\outputFiles\" +
                         operationGroup + "OperationGroup.cs", true))
             {
                 file.WriteLine("namespace Microsoft.Cloud.Engineering.RdfeExtension");
@@ -232,7 +230,6 @@ namespace AcisExtensionCodeGenerator
             using (
                 System.IO.StreamWriter file =
                     new System.IO.StreamWriter(
-                        @"C:\Users\xiowei\Documents\Visual Studio 2015\Projects\AcisExtensionCodeGenerator\AcisExtensionCodeGenerator\bin\Debug\outputFiles\" +
                         operation + "Operation.cs", true))
             {
                 file.WriteLine("namespace Microsoft.Cloud.Engineering.RdfeExtension");
@@ -329,7 +326,6 @@ namespace AcisExtensionCodeGenerator
             using (
                 System.IO.StreamWriter file =
                     new System.IO.StreamWriter(
-                        @"C:\Users\xiowei\Documents\Visual Studio 2015\Projects\AcisExtensionCodeGenerator\AcisExtensionCodeGenerator\bin\Debug\outputFiles\" +
                         parameter.ParamFileName + "Param.cs", true))
             {
                 file.WriteLine("namespace Microsoft.Cloud.Engineering.RdfeExtension.Parameters");

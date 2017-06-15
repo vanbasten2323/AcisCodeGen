@@ -1,9 +1,0 @@
-Operation:DeleteServiceSetting
-OperationDisplayName:Delete Service Setting
-OperationType:RDFESuperOperation
-OperationGroup:OSManagementOperation
-OperationGroupDisplayName:na
-ApproverParameterNeeded:Y
-ApproverLinkParameterNeeded:Y
-HelperFunctionName:DeleteServiceSetting
-Parameter:string:name:Service Setting Name:ServiceSettingName:AcisSMETextParameter
